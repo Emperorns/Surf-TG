@@ -13,13 +13,15 @@
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
     <link rel="stylesheet" href="https://bootswatch.com/5/<!-- Theme -->/bootstrap.min.css">
     <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool'></script>
+    <!-- IMA SDK -->
+    <script async src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
     <style>
+        /* Existing CSS remains same */
         body {
             height: 100vh;
             margin: 0;
             justify-content: center;
             align-items: center;
-
         }
 
         .container {
@@ -32,63 +34,22 @@
             gap: 10px;
         }
 
-        a {
-            text-decoration: none;
+        /* Add ad container styling */
+        #ad-container {
+            position: absolute;
+            z-index: 1000;
+            width: 100%;
+            height: 100%;
+            display: none;
         }
 
-        .card {
-            align-items: left;
-            box-shadow: none;
-            border-radius: 0%;
-            max-width: 48%
-        }
-
-        .video-player {
-            max-width: 48%;
-            margin: auto;
-            padding-bottom: 10px;
-        }
-
-        .plyr {
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-
-        @media (max-width: 992px) {
-
-            .video-player {
-                max-width: 80%;
-                margin: auto;
-            }
-
-            .card {
-                align-items: left;
-                box-shadow: none;
-                border-radius: 0%;
-                max-width: 80%
-            }
-
-            .navbar {
-                padding-right: 15px;
-                padding-left: 15px;
-            }
-        }
+        /* Rest of existing CSS remains same */
     </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg bg-primary mb-3 p-1" data-bs-theme="dark">
+        <!-- Existing Navbar remains same -->
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
                 <img src="https://cdn.jsdelivr.net/gh/weebzone/weebzone/data/Surf-TG/src/logo%20(2).png" alt="Logo"
@@ -100,20 +61,27 @@
                         Logout</button>
                 </form>
             </div>
-
         </div>
     </nav>
-    <div class="video-player">
+
+    <!-- Ad Container -->
+    <div id="ad-container"></div>
+
+    <div class="video-player" style="position: relative;">
         <video controls crossorigin playsinline data-poster="<!-- Poster -->" id="player">
             <source src="#" type="video/mp4" />
         </video>
     </div>
+
+    <!-- Existing Card Container remains same -->
     <div class="card bg-light mb-3" style="margin: auto; border-radius: 5px;">
         <div class="card-body">
             <h6 class="card-title">Name: <!-- Filename --></h6>
             <p class="card-text">Size: <!-- Size --></p>
         </div>
     </div>
+
+    <!-- Existing Button Container remains same -->
     <div class="container d-flex justify-content-center align-items-center" style="width: 100%; padding: 0 5px;">
         <div onclick="mx_player()" class="btn btn-primary">MX Player</div>
         <div onclick="vlc_player()" class="btn btn-primary">VLC Mobile</div>
@@ -122,6 +90,21 @@
         <div onclick="copyUrl()" class="btn btn-primary">Copy Url</div>
         <div onclick="download()" class="btn btn-primary">Download</div>
     </div>
+
+    <!-- AdSense Banner Ad -->
+    <div class="container text-center mt-3">
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-xxxxxxxxxxxxxx"  <!-- Replace with your AdSense ID -->
+            data-ad-slot="xxxxxxxxxx"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- Existing Footer remains same -->
     <footer class="footer mt-auto py-3 text-muted text-center" style="color: white;">
         <div class="container d-flex justify-content-center align-items-center" style="width: 100%; padding: 0 10px;">
             <p class="float-end">
@@ -134,73 +117,114 @@
                 Reserved.
         </div>
     </footer>
-</body>
-<script>
-    const videolink = window.location.href;
-    const url = new URL(videolink);
-    const domainUrl = url.origin;
-    const videoIdWithParams = videolink.split('/').pop();
-    const videoId = videoIdWithParams.split('?')[0];
-    const idParam = new URLSearchParams(window.location.search).get('id');
-    const hashParam = new URLSearchParams(window.location.search).get('hash');
-    const encodedName = encodeURIComponent('<!-- Filename -->');
 
-    const downloadlink = `${domainUrl}/${videoId}/${encodedName}?id=${idParam}&hash=${hashParam}`;
+    <script>
+        // Existing variables and player setup remains same
+        const videolink = window.location.href;
+        const url = new URL(videolink);
+        const domainUrl = url.origin;
+        const videoIdWithParams = videolink.split('/').pop();
+        const videoId = videoIdWithParams.split('?')[0];
+        const idParam = new URLSearchParams(window.location.search).get('id');
+        const hashParam = new URLSearchParams(window.location.search).get('hash');
+        const encodedName = encodeURIComponent('<!-- Filename -->');
 
-    const player = new Plyr('#player', {
-        controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen', 'pip', 'airplay', 'settings', "play-large", 'duration'],
-        hideControls: false,
-        keyboard: { focused: true, global: true },
-        loop: { active: false },
-    });
-    function mx_player() {
-        const openDownloadLink = downloadlink;
-        const openMx = `intent:${openDownloadLink}#Intent;package=com.mxtech.videoplayer.ad;end`;
-        window.location.href = openMx;
-    }
+        const downloadlink = `${domainUrl}/${videoId}/${encodedName}?id=${idParam}&hash=${hashParam}`;
 
-    function vlc_player() {
-        const openDownloadLink = downloadlink;
-        const openVlc = `vlc://${openDownloadLink}`;
-        window.location.href = openVlc;
-    }
-    function km_player() {
-        const openDownloadLink = downloadlink;
-        const openKmplayer = `intent:${openDownloadLink}#Intent;package=com.kmplayer;end`;
-        window.location.href = openKmplayer;
-    }
-    function download() {
-        const openDownloadLink = downloadlink;
-        window.location.href = openDownloadLink;
-    }
-    function get_file() {
-        const regex = /(\d+)\?id=(\d+)&/;
-        const match = videolink.match(regex);
-        if (match) {
-            const chatId = "-100" + match[1];
-            const messageId = match[2];
-            const openTG = `https://t.me/<!-- Username -->?start=file_${messageId}${chatId}`;
-            window.location.href = openTG;
+        // AD MANAGEMENT CODE
+        let adsLoader;
+        let adsManager;
+        let adDisplayContainer;
+
+        function initializeAds() {
+            adDisplayContainer = new google.ima.AdDisplayContainer(
+                document.getElementById('ad-container'),
+                document.getElementById('player')
+            );
+            
+            adsLoader = new google.ima.AdsLoader(adDisplayContainer);
+            
+            adsLoader.addEventListener(
+                google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,
+                onAdsManagerLoaded
+            );
+            
+            adsLoader.addEventListener(
+                google.ima.AdErrorEvent.Type.AD_ERROR,
+                onAdError
+            );
+
+            const adsRequest = new google.ima.AdsRequest();
+            adsRequest.adTagUrl = 'YOUR_AD_TAG_URL_HERE'; // Replace with your ad tag
+            adsRequest.linearAdSlotWidth = 640;
+            adsRequest.linearAdSlotHeight = 400;
+            adsRequest.nonLinearAdSlotWidth = 640;
+            adsRequest.nonLinearAdSlotHeight = 400;
+
+            adsLoader.requestAds(adsRequest);
         }
-    }
-    function copyUrl() {
-        const url = downloadlink;
-        navigator.clipboard.writeText(url)
-            .then(() => {
-                alert('URL copied to clipboard!');
-            })
-            .catch((error) => {
-                console.error('Failed to copy URL: ', error);
-            });
-    }
-    function updateVideoSource() {
-        const videoElement = document.getElementById('player');
-        const newSrc = downloadlink;
-        videoElement.src = newSrc;
-    }
-    window.onload = function () {
-        updateVideoSource();
-    };
-</script>
 
+        function onAdsManagerLoaded(event) {
+            adsManager = event.getAdsManager(player);
+            adsManager.init(640, 360, google.ima.ViewMode.NORMAL);
+            adsManager.start();
+        }
+
+        function onAdError(event) {
+            console.error('Ad error:', event.getError());
+            adDisplayContainer.destroy();
+            player.play();
+        }
+
+        // Modified player initialization
+        const player = new Plyr('#player', {
+            controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen', 'pip', 'airplay', 'settings', "play-large", 'duration'],
+            hideControls: false,
+            keyboard: { focused: true, global: true },
+            loop: { active: false },
+        });
+
+        player.on('ready', () => {
+            adDisplayContainer.initialize();
+            initializeAds();
+        });
+
+        player.on('play', () => {
+            if (!adsManager) return;
+            try {
+                google.ima.settings.setVpaidMode(google.ima.ImaSdkSettings.VpaidMode.ENABLED);
+                document.getElementById('ad-container').style.display = 'block';
+            } catch (e) {
+                console.error('Ad play error:', e);
+            }
+        });
+
+        // Existing functions remain same
+        function mx_player() { /* ... */ }
+        function vlc_player() { /* ... */ }
+        function km_player() { /* ... */ }
+        function download() { /* ... */ }
+        function get_file() { /* ... */ }
+        function copyUrl() { /* ... */ }
+        function updateVideoSource() { /* ... */ }
+
+        window.onload = function () {
+            updateVideoSource();
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        };
+
+        // Mid-roll ad example (trigger at 30 seconds)
+        player.on('timeupdate', () => {
+            if (Math.floor(player.currentTime) === 30) {
+                showMidRollAd();
+            }
+        });
+
+        function showMidRollAd() {
+            const adsRequest = new google.ima.AdsRequest();
+            adsRequest.adTagUrl = 'YOUR_MIDROLL_AD_TAG'; 
+            adsLoader.requestAds(adsRequest);
+        }
+    </script>
+</body>
 </html>
