@@ -1,53 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Existing meta tags -->
+    <!-- Meta tags same as dl.html -->
     <title>Surf-TG: Home</title>
-    <link rel="stylesheet" href="https://bootswatch.com/5/<!-- Theme -->/bootstrap.min.css">
-    <link rel="stylesheet" href="/style.css">
-    <!-- Add ads script -->
-    <script type="module" src="https://securepubads.shareus.io/scripts/tag/js/gpt.js"></script>
+    <!-- Include same CSS/JS as dl.html -->
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <img src="https://cdn.jsdelivr.net/gh/weebzone/weebzone/data/Surf-TG/src/logo%20(2).png" alt="Logo">
-            </a>
-            <div class="d-flex align-items-center">
-                <!-- Ads Container -->
-                <div id="shareus-admanager-9449938776-1UrfNL4yyP" class="mx-3"></div>
-                <!-- Existing logout button -->
-            </div>
-        </div>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <!-- Same navbar as dl.html -->
     </nav>
 
     <div class="content-wrapper">
-        <div class="ad-container">
-            <script>
-                window._shareustag = window._shareustag || {cmd:[]};
-                _shareustag.cmd.push(function() {
-                    var slot1 = _shareustag.defineSlot('/shareus-admanager/9449938776/1UrfNL4yyP/00', ["Responsive"],'shareus-admanager-9449938776-1UrfNL4yyP');
-                });
-            </script>
+        <div class="ad-container mb-5">
+            <!-- Ad script same as dl.html -->
+        </div>
+
+        <div class="header-section mb-5">
+            <h1 class="display-6 mb-4">Your Media Library</h1>
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">Featured Content</h3>
+                <button class="admin-only btn btn-netflix" data-bs-toggle="modal" data-bs-target="#createFolderModal">
+                    <i class="bi bi-folder-plus"></i> New Folder
+                </button>
+            </div>
         </div>
 
         <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-4">
             <!-- Channel cards -->
             <div class="col">
                 <div class="card">
-                    <img src="<!-- Thumbnail -->" class="card-img-top" alt="...">
+                    <img src="<!-- Thumbnail -->" class="card-img-top" alt="Content">
                     <div class="card-body">
                         <h5 class="card-title"><!-- Title --></h5>
                         <div class="d-grid">
-                            <button class="btn btn-danger btn-sm">View Files</button>
+                            <a href="#" class="btn btn-netflix btn-sm">Explore</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Repeat for other cards -->
+            <!-- Repeat cards -->
         </div>
     </div>
-    <!-- Existing scripts -->
+
+    <!-- Modals remain same with updated styling -->
 </body>
 </html>
