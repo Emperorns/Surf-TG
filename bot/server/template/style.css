@@ -1,0 +1,99 @@
+/* style.css */
+:root {
+    --netflix-red: #e50914;
+    --netflix-dark: #141414;
+    --netflix-gray: #303030;
+}
+
+body {
+    background-color: var(--netflix-dark);
+    color: white;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+}
+
+.navbar {
+    background-color: var(--netflix-dark) !important;
+    border-bottom: 1px solid var(--netflix-gray);
+    padding: 0 3%;
+}
+
+.navbar-brand img {
+    height: 45px;
+}
+
+.content-wrapper {
+    padding: 2rem 3%;
+    margin-top: 70px;
+}
+
+.card {
+    background-color: var(--netflix-gray);
+    border: none;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    z-index: 2;
+}
+
+.card-title {
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.btn-danger {
+    background-color: var(--netflix-red);
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #b20710;
+}
+
+/* Ads Container */
+.ad-container {
+    margin: 20px 0;
+    padding: 15px;
+    background: #000;
+    border-radius: 4px;
+}
+
+/* Video Player Styles */
+.video-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+/* Login Page Styles */
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    background: rgba(0,0,0,0.75);
+    padding: 2rem;
+    border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 150px;
+    }
+    
+    .content-wrapper {
+        padding: 1rem;
+    }
+}
